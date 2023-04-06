@@ -17,6 +17,18 @@
       "email": "ishu@gmail.com",
       "password": "amdin",
       "id": 3
+    },
+    {
+      "username": "shubham",
+      "email": "shubham@gmail.com",
+      "password": "admin",
+      "id": 4
+    },
+    {
+      "username": "Vipin",
+      "email": "vipin12@gmail.com",
+      "password": "admin",
+      "id": 5
     }
   ],
   "tasks": []
