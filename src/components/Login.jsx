@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import TodoContext from '../context/TodoContext';
 
 function Login(props) {
 
+    const { message, loginUser }= useContext(TodoContext);
     const [formData, setFormData]= useState(null);
-    const [message, setMessage] = useState("");
+    
 
     const handleChange = (e)=>{
         const { name, value } = e.target;
@@ -15,19 +17,7 @@ function Login(props) {
 
     const onSubmit=async(e)=>{
         e.preventDefault();
-        const response = await fetch(`http://localhost:5000/users?email=${formData.email}&password=${formData.password}`, {method: "GET"});
-        if(response.ok){
-            const checkUser =await response.json();
-            if(checkUser.length > 0){
-                setMessage("Logged in successfully");
-            }
-            else{
-                setMessage("Email/Password mismatch");
-            }
-        }
-        else{
-            setMessage("Please try again");
-        }
+       loginUser(formData);
     }
 
     return (

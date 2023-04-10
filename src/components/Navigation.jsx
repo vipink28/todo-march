@@ -1,7 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 function Navigation(props) {
+  //useEffect()
+  const [currentUser, setCurrentUser] = useState(null)
+  useEffect(()=>{
+    const user = localStorage.getItem('user');
+    const currUser = JSON.parse(user);
+    setCurrentUser(currUser);
+  }, [])
+
+  
   return (
     <nav className="navbar navbar-expand-lg bg-light">
       <div className="container-fluid">
@@ -43,7 +52,7 @@ function Navigation(props) {
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/profile">
-                Profile
+                {currentUser?.username}
               </Link>
             </li>
 
