@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import TodoContext from "../context/TodoContext";
 
 function Register(props) {
-  const { message, registerUser } = useContext(TodoContext);
+  const { message, registerUser, setMessage } = useContext(TodoContext);
   const [formData, setFormData] = useState(null);
 
   
@@ -19,6 +19,11 @@ function Register(props) {
     e.preventDefault();
     registerUser(formData);
   };
+
+  useEffect(()=>{
+    setMessage("")
+  }, [])
+
 
   return (
     <form>

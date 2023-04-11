@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import TodoContext from '../context/TodoContext';
 
 function Login(props) {
 
-    const { message, loginUser }= useContext(TodoContext);
+    const { message, loginUser, setMessage}= useContext(TodoContext);
     const [formData, setFormData]= useState(null);
     
 
@@ -19,6 +19,10 @@ function Login(props) {
         e.preventDefault();
        loginUser(formData);
     }
+
+    useEffect(()=>{
+        setMessage("");
+    }, [])
 
     return (
         <form>

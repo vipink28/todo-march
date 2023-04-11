@@ -47,6 +47,36 @@
       "email": "vipink291@gmail.com",
       "password": "admin",
       "id": 8
+    },
+    {
+      "username": "Ajauy",
+      "email": "ajay@gmail.com",
+      "password": "admin",
+      "id": 9
+    },
+    {
+      "username": "john",
+      "email": "john@gmail.com",
+      "password": "admin",
+      "id": 10
+    },
+    {
+      "username": "kevin",
+      "email": "kevin@gmail.com",
+      "password": "admin",
+      "id": 11
+    },
+    {
+      "username": "Shane",
+      "email": "shane@gmail.com",
+      "password": "admin",
+      "id": 12
+    },
+    {
+      "username": "kevin2",
+      "email": "kevin2@gmail.com",
+      "password": "admin",
+      "id": 13
     }
   ],
   "tasks": []
