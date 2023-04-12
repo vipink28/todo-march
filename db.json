@@ -77,7 +77,15 @@
       "email": "kevin2@gmail.com",
       "password": "admin",
       "id": 13
+    },
+    {
+      "username": "Simran",
+      "email": "simran@gmail.com",
+      "password": "admin",
+      "id": 14
     }
   ],
-  "tasks": []
+  "tasks": [
+   
+  ]
 }

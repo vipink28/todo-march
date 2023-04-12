@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from  "react";
-import { useNavigate } from "react-router-dom";
+import { json, useNavigate } from "react-router-dom";
 
 const TodoContext = createContext();
 
@@ -73,6 +73,26 @@ export const TodoProvider =({children})=>{
         }
     }
 
+    // create Task function
+    const createTask = async(formData)=>{
+      const obj = {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }
+
+      const response = await fetch(`http://localhost:5000/tasks`, obj);
+
+      if(response.ok){
+        setMessage("Task created successfully");
+      }else{
+        setMessage("Something went wrong");
+      }
+    }
+
+
 
     useEffect(()=>{
       const localUser = localStorage.getItem('user');
@@ -87,7 +107,8 @@ export const TodoProvider =({children})=>{
             registerUser,
             loginUser,
             user,
-            setUser
+            setUser,
+            createTask
         }}>
             {children}
         </TodoContext.Provider>
