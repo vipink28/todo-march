@@ -2,13 +2,14 @@ import React, { useContext, useEffect, useState } from 'react';
 import TodoContext from '../context/TodoContext';
 function TaskForm(props) {
     const [formData, setFormData] = useState();
-    const { message, setMessage, createTask } = useContext(TodoContext);
-
+    const { message, setMessage, createTask, user } = useContext(TodoContext);
+  
     const handleChange = (e)=>{
         const {name, value}= e.target;
         setFormData((prev)=>({
             ...prev,
-            [name]: value
+            [name]: value,
+            userId: user?.id
         }))
     }
 

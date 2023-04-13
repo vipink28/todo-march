@@ -7,6 +7,10 @@ export const TodoProvider =({children})=>{
     const [message, setMessage] = useState("");
     const [user, setUser] = useState(null);
 
+    const [allTasks, setAllTasks] = useState();
+    const [latestTask, setLatestTask] = useState();
+    const [recentTask, setRecentTask] = useState();
+
     const navigate = useNavigate();
 
 
@@ -93,12 +97,35 @@ export const TodoProvider =({children})=>{
     }
 
 
+    // getTasks
+
+    const getTasks = async()=>{
+      const response =await fetch(`http://localhost:5000/tasks?userId=${user.id}`, {method: "GET"})
+      if(response.ok){
+        const tasks = await response.json();
+        setAllTasks(tasks);
+        const latest = tasks[tasks.length-1];
+        setLatestTask(latest);
+        const recent = tasks.slice(-3);
+        setRecentTask(recent);
+      }
+    }
+
+
+ 
+
 
     useEffect(()=>{
       const localUser = localStorage.getItem('user');
       const currentUser = JSON.parse(localUser);
       setUser(currentUser); 
     }, [])
+
+    useEffect(()=>{
+      if(user != null){
+        getTasks();
+      }      
+    }, [user])
 
     return(
         <TodoContext.Provider value={{
@@ -108,7 +135,10 @@ export const TodoProvider =({children})=>{
             loginUser,
             user,
             setUser,
-            createTask
+            createTask,
+            allTasks,
+            latestTask,
+            recentTask
         }}>
             {children}
         </TodoContext.Provider>
