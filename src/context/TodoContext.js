@@ -9,7 +9,7 @@ export const TodoProvider =({children})=>{
 
     const [allTasks, setAllTasks] = useState();
     const [latestTask, setLatestTask] = useState();
-    const [recentTask, setRecentTask] = useState();
+    const [recentTask, setRecentTask] = useState([]);
 
     const navigate = useNavigate();
 
@@ -91,6 +91,7 @@ export const TodoProvider =({children})=>{
 
       if(response.ok){
         setMessage("Task created successfully");
+        getTasks();
       }else{
         setMessage("Something went wrong");
       }

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import TaskForm from '../components/TaskForm';
 import TodoContext from '../context/TodoContext';
+import { dateFormat } from '../helper';
 
 function CreateTask(props) {
     const { latestTask, recentTask } = useContext(TodoContext);
@@ -12,7 +13,7 @@ function CreateTask(props) {
                  <TaskForm />
                 </div>
                 <div className='col-lg-6 h-100 d-flex flex-column justify-content-center align-items-center'>
-                   <div className='card'>
+                   <div className='card w-75'>
                         <div className='card-header d-flex'>
                             <h5>New Task</h5>
                             <button className='btn btn-info ms-auto'>Edit</button>
@@ -22,10 +23,27 @@ function CreateTask(props) {
                             <p>{latestTask?.description}</p>
                         </div>
                         <div className="card-footer d-flex">
-                            <p>Created On: 23/03/23</p>
-                            <p className='ms-auto'>Due On: {latestTask?.dueDate}</p>
+                            <p>Created On: {dateFormat(latestTask?.createdOn)}</p>
+                            <p className='ms-auto'>Due On: {dateFormat(latestTask?.dueDate)}</p>
                         </div>
                    </div>
+
+                   <div className="card mt-5 w-75">
+                        <h3>Recent Tasks</h3>
+                        <div className="card-body">
+                            {
+                                recentTask.map((item)=>{
+                                    return(
+                                        <div className='d-flex py-2 border'>
+                                            <p>{item.title}</p>
+                                            <p className='ms-auto'>{dateFormat(item.dueDate)}</p>
+                                        </div>
+                                    )
+                                })
+                            }
+                        </div>
+                   </div>
+
                 </div>
             </div>
         </div>

@@ -9,7 +9,8 @@ function TaskForm(props) {
         setFormData((prev)=>({
             ...prev,
             [name]: value,
-            userId: user?.id
+            userId: user?.id,
+            createdOn: new Date()
         }))
     }
 
