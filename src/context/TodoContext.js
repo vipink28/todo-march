@@ -88,9 +88,28 @@ export const TodoProvider =({children})=>{
       }
 
       const response = await fetch(`http://localhost:5000/tasks`, obj);
-
       if(response.ok){
         setMessage("Task created successfully");
+        getTasks();
+      }else{
+        setMessage("Something went wrong");
+      }
+    }
+
+    // update task
+
+    const updateTask = async(formData)=>{
+      const obj = {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(formData)
+      }
+
+      const response = await fetch(`http://localhost:5000/tasks/${formData.id}`, obj);
+      if(response.ok){
+        setMessage("Task Updated successfully");
         getTasks();
       }else{
         setMessage("Something went wrong");
@@ -139,7 +158,8 @@ export const TodoProvider =({children})=>{
             createTask,
             allTasks,
             latestTask,
-            recentTask
+            recentTask,
+            updateTask
         }}>
             {children}
         </TodoContext.Provider>
