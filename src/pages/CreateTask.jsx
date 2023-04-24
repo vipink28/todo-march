@@ -1,11 +1,13 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import TaskForm from '../components/TaskForm';
 import TodoContext from '../context/TodoContext';
 import { dateFormat } from '../helper';
 
 function CreateTask(props) {
     const { latestTask, recentTask } = useContext(TodoContext);
-    const [isUpdate, setIsUpdate]= useState(false);
+    const [isUpdate, setIsUpdate]= useState(false);   
+
+
     const onEdit = ()=>{
         setIsUpdate(true);
     }

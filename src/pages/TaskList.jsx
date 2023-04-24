@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import { useContext } from 'react';
 import TodoContext from '../context/TodoContext';
 import { Link } from 'react-router-dom';
 import { dateFormat } from '../helper';
 import Popup from '../components/Popup';
 
+function reducer(state, action){
+    switch(action.type){
+        case 'VIEW': return {type:'view', data: action.payload};
+        case 'EDIT': return {type:'edit', data: action.payload};
+        case 'DELETE': return {type: 'delete', data: action.payload};
+        default: return state;
+    }
+}
+
 function TaskList(props) {
     const { allTasks } = useContext(TodoContext);
+    const [state, dispatch] = useReducer(reducer, {type:'', data: ''});
     return (
         <div className='container py-5'>
             <div className='bg-primary rounded-3 p-4'>
@@ -35,13 +45,13 @@ function TaskList(props) {
                                             <td>{item.description}</td>
                                             <td>{dateFormat(item.dueDate)}</td>
                                             <td>
-                                                <span className='px-2' data-bs-toggle="modal" data-bs-target="#task-modal">
+                                                <span className='px-2' data-bs-toggle="modal" data-bs-target="#task-modal" onClick={()=>{dispatch({type:'VIEW', payload: item})}}>
                                                     <i class="fa-solid fa-eye"></i>
                                                 </span>
-                                                <span className='px-2'data-bs-toggle="modal" data-bs-target="#task-modal">
+                                                <span className='px-2'data-bs-toggle="modal" data-bs-target="#task-modal" onClick={()=>{dispatch({type:'EDIT', payload: item})}}>
                                                 <i class="fa-solid fa-pen-to-square"></i>
                                                 </span>
-                                                <span className='px-2'data-bs-toggle="modal" data-bs-target="#task-modal">
+                                                <span className='px-2'data-bs-toggle="modal" data-bs-target="#task-modal" onClick={()=>{dispatch({type:'DELETE', payload: item})}}>
                                                 <i class="fa-solid fa-trash"></i>
                                                 </span>
                                             </td>
@@ -53,7 +63,7 @@ function TaskList(props) {
                     </table>
                 </div>
             </div>
-            <Popup />
+            <Popup type={state.type} data={state.data} />
         </div>
     );
 }

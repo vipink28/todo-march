@@ -6,10 +6,9 @@ function TaskForm(props) {
         description: "",
         dueDate: ""
     }
-    const { isUpdate, data, changeUpdate } = props;
+    const { isUpdate, data, changeUpdate, isPopup, btn } = props;
     const [formData, setFormData] = useState(init);
     const { message, setMessage, createTask, user, updateTask } = useContext(TodoContext);
-
     useEffect(()=>{
         if(isUpdate){
             setFormData(data);
@@ -42,7 +41,11 @@ function TaskForm(props) {
 
     const onCancel=(e)=>{
         e.preventDefault();
-        changeUpdate();
+        if(!isPopup){
+            changeUpdate();
+        }else{
+            btn.current.click();
+        }
         setFormData(init);
     }
 

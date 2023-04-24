@@ -131,6 +131,14 @@ export const TodoProvider =({children})=>{
       }
     }
 
+    const deleteTask = async(id)=>{
+      const response = await fetch(`http://localhost:5000/tasks/${id}`, {method: 'DELETE'});
+      if(response.ok){
+        setMessage("Task deleted successfully");
+      }else{
+        setMessage("something went wrong");
+      }
+    }
 
  
 
@@ -147,6 +155,8 @@ export const TodoProvider =({children})=>{
       }      
     }, [user])
 
+
+
     return(
         <TodoContext.Provider value={{
             message,
@@ -159,7 +169,8 @@ export const TodoProvider =({children})=>{
             allTasks,
             latestTask,
             recentTask,
-            updateTask
+            updateTask,
+            deleteTask
         }}>
             {children}
         </TodoContext.Provider>
