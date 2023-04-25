@@ -120,6 +120,7 @@ export const TodoProvider =({children})=>{
     // getTasks
 
     const getTasks = async()=>{
+      console.log("getTask executed");
       const response =await fetch(`http://localhost:5000/tasks?userId=${user.id}`, {method: "GET"})
       if(response.ok){
         const tasks = await response.json();
@@ -146,8 +147,17 @@ export const TodoProvider =({children})=>{
     useEffect(()=>{
       const localUser = localStorage.getItem('user');
       const currentUser = JSON.parse(localUser);
-      setUser(currentUser); 
+      if(currentUser){
+        setUser(currentUser); 
+      }
     }, [])
+
+    // {
+    //   username: checkUser[0].username,
+    //   id: checkUser[0].id,
+    //   email: checkUser[0].email,
+    //  isLoggedIn
+    // }
 
     useEffect(()=>{
       if(user != null){

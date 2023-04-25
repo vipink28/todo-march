@@ -2,10 +2,11 @@ import React, { useContext, useRef, useState } from 'react';
 import TaskForm from '../components/TaskForm';
 import TodoContext from '../context/TodoContext';
 import { dateFormat } from '../helper';
+import TaskFormTwo from '../components/TaskFormTwo';
 
 function CreateTask(props) {
     const { latestTask, recentTask } = useContext(TodoContext);
-    const [isUpdate, setIsUpdate]= useState(false);   
+   const [isUpdate, setIsUpdate]=useState(false);
 
 
     const onEdit = ()=>{
@@ -20,7 +21,7 @@ function CreateTask(props) {
         <div className='container-fluid h-100'>
             <div className='row h-100'>
                 <div className='col-lg-6 bg-primary d-flex flex-column align-items-center justify-content-center h-100'>
-                 <TaskForm isUpdate={isUpdate} data={latestTask} changeUpdate={changeUpdate}/>
+                 <TaskFormTwo isUpdate={isUpdate} data={latestTask} changeUpdate={changeUpdate}/>
                 </div>
                 <div className='col-lg-6 h-100 d-flex flex-column justify-content-center align-items-center'>
                    <div className='card w-75'>

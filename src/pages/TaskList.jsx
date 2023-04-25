@@ -46,13 +46,13 @@ function TaskList(props) {
                                             <td>{dateFormat(item.dueDate)}</td>
                                             <td>
                                                 <span className='px-2' data-bs-toggle="modal" data-bs-target="#task-modal" onClick={()=>{dispatch({type:'VIEW', payload: item})}}>
-                                                    <i class="fa-solid fa-eye"></i>
+                                                    <i className="fa-solid fa-eye"></i>
                                                 </span>
                                                 <span className='px-2'data-bs-toggle="modal" data-bs-target="#task-modal" onClick={()=>{dispatch({type:'EDIT', payload: item})}}>
-                                                <i class="fa-solid fa-pen-to-square"></i>
+                                                <i className="fa-solid fa-pen-to-square"></i>
                                                 </span>
                                                 <span className='px-2'data-bs-toggle="modal" data-bs-target="#task-modal" onClick={()=>{dispatch({type:'DELETE', payload: item})}}>
-                                                <i class="fa-solid fa-trash"></i>
+                                                <i className="fa-solid fa-trash"></i>
                                                 </span>
                                             </td>
                                         </tr>
