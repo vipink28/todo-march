@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useContext } from 'react';
 import TodoContext from '../context/TodoContext';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,21 @@ function reducer(state, action){
 function TaskList(props) {
     const { allTasks } = useContext(TodoContext);
     const [state, dispatch] = useReducer(reducer, {type:'', data: ''});
+    const [searchText, setSearchText] = useState('');
+    const [taskList, setTaskList]= useState([]);
+
+    const onSearch=(e)=>{
+        const { value } = e.target;
+        setSearchText(value);
+    }
+
+    useEffect(()=>{
+        const filteredArr = allTasks?.filter((task) => task.title.toLowerCase().indexOf(searchText.toLowerCase()) >= 0)
+        setTaskList(filteredArr);
+
+    }, [searchText, allTasks])
+
+
     return (
         <div className='container py-5'>
             <div className='bg-primary rounded-3 p-4'>
@@ -25,6 +40,8 @@ function TaskList(props) {
                     <Link className='btn btn-info ms-auto' to="/create-task">Create Task</Link>
                 </div>
                 <div className='mt-3'>
+                    <input type="text" className='form-control' onChange={onSearch}/>
+
                     <table className='table table-striped table-dark'>
                         <thead>
                             <tr>
@@ -37,7 +54,7 @@ function TaskList(props) {
                         </thead>
                         <tbody>
                             {
-                                allTasks?.map((item)=>{
+                                taskList?.map((item)=>{
                                     return(
                                         <tr key={item.id}>
                                             <td>{item.id}</td>
